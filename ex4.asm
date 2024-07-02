@@ -4,87 +4,86 @@
 _start:
 #your code here
 
-movb $0, %r8b #this is for summing all good series's
+movl $0, %r8d #this is for summing all good series's
 movq $0, %rsi #rsi holds the counter for the series's
 
-
-startNode:
+startNode_HW1:
 lea (nodes), %rdi
 leaq 0(%rdi , %rsi, 8), %rdi #loading the address of the cur node
 movq (%rdi), %rdi #going to cur node
-movb $1, %r15b #if r15 has 1 it means that the sequence is good, if not it will hold 0
+movl $1, %r15d #if r15 has 1 it means that the sequence is good, if not it will hold 0
 movl $0, %edx # we use rdx to check if we are decreasing or increasing, we start with zero because we start with equal
 
-startDownLoop:
+startDownLoop_HW1:
 movq 0(%rdi), %rdi #go to rdi -> prev
 testq %rdi, %rdi #checking that rdi is not null
-je endDownLoop
+je endDownLoop_HW1
 
 movq 0(%rdi), %rax #putting in rax rdi->prev
 testq %rax, %rax #checking that rax is not null
-je endDownLoop
+je endDownLoop_HW1
 
 movl 8(%rdi), %ebx # putting in rbx rdi->val
 movl 8(%rax), %ecx # putting in rcx rax->val
 
 cmpl %ebx, %ecx
-jg  caseGreaterDown
-jl caseSmallerDown
-jmp startDownLoop #starting loop again if rbx  == rax
+jg  caseGreaterDown_HW1
+jl caseSmallerDown_HW1
+jmp startDownLoop_HW1 #starting loop again if rbx  == rax
 
-caseGreaterDown:
+caseGreaterDown_HW1:
 cmpl $-1, %edx
-je loopError #if the series is decreasing this is an error
+je loopError_HW1 #if the series is decreasing this is an error
 movl $1, %edx #updating series to increasing
-jmp startDownLoop
+jmp startDownLoop_HW1
 
-caseSmallerDown:
+caseSmallerDown_HW1:
 cmpl $1, %edx
-je loopError #if the series is decreasing this is an error
+je loopError_HW1 #if the series is decreasing this is an error
 movl $-1, %edx #updating series to decreasing
-jmp startDownLoop
+jmp startDownLoop_HW1
 
-endDownLoop:
+endDownLoop_HW1:
 lea (nodes), %rdi
 leaq 0(%rdi , %rsi, 8), %rdi
 movq (%rdi), %rdi
 movl $0, %edx # we use rdx to check if we are decreasing or increasing, we start with zero because we start with equal
 
-startUpLoop:
+startUpLoop_HW1:
 movq 12(%rdi), %rdi #go to rdi -> next
 testq %rdi, %rdi #checking that rdi is not null
-je endIt
+je endIt_HW1
 
 movq 12(%rdi), %rax #putting in rax rdi->next
 testq %rax, %rax #checking that rax is not null
-je endIt
+je endIt_HW1
 
 movl 8(%rdi), %ebx # putting in rbx rdi->val
 movl 8(%rax), %ecx # putting in rcx rax->val
 
 cmpl %ebx, %ecx
-jg caseGreaterUp
-jl caseSmallerUp
-jmp startDownLoop #starting loop again if rbx  == rax
+jg caseGreaterUp_HW1
+jl caseSmallerUp_HW1
+jmp startUpLoop_HW1 #starting loop again if rbx  == rax
 
-caseGreaterUp:
+caseGreaterUp_HW1:
 cmpl $-1, %edx
-je loopError #if the series is decreasing this is an error
+je loopError_HW1 #if the series is decreasing this is an error
 movl $1, %edx #updating series to increasing
-jmp startUpLoop
+jmp startUpLoop_HW1
 
-caseSmallerUp:
+caseSmallerUp_HW1:
 cmpl $1, %edx
-je loopError #if the series is decreasing this is an error
+je loopError_HW1 #if the series is decreasing this is an error
 movl $-1, %edx #updating series to decreasing
-jmp startUpLoop
+jmp startUpLoop_HW1
 
-loopError: 
-movb $0, %r15b # we had an error with one of the iterations 
+loopError_HW1: 
+movl $0, %r15d # we had an error with one of the iterations 
 
-endIt:
-addb %r15b, %r8b #adding one to r8 if the series was good
+endIt_HW1:
+addl %r15d, %r8d #adding one to r8 if the series was good
 addq $1, %rsi #going to the next node
 cmpq $3, %rsi
-jne startNode
-movb %r8b, result
+jne startNode_HW1
+movl %r8d, result

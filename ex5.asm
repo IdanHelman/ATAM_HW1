@@ -4,11 +4,12 @@
 _start:
 #your code here
 
-movb $0, %r8b #r8b will hold the return value
+movb $1, %r8b #r8b will hold the return value
 lea (series), %r15 #r15 is a pointer to the beggining of the series
 movl (size), %r14d #rq14 is the size of the series
 cmp $1, %r14d
 jle end_HW1 #checking that size > 1
+movb $0, %r8b
 
 #checking case 1 - diff + diff
 movl $0, %edi
@@ -72,7 +73,9 @@ jmp contMainLoop2_HW1
 notFirst2_HW1:
 movl %ebx, %eax #eax keeps the cur val of the difference series
 cdq
-idivl  %r13d #eax now has the quot of the difference series
+idivl %r13d #eax now has the quot of the difference series
+testl %edx, %edx
+jne seriesError2_HW1
 movl %ebx, %r13d #r13 now has the cur value of the diff series
 
 cmp $2, %rdi
@@ -108,6 +111,8 @@ testl %eax, %eax #number is zero so no geo series
 je seriesError3_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
+testl %edx, %edx
+jne seriesError3_HW1
 cmp $1, %rdi
 jne notFirst3_HW1
 movl %eax, %r13d #r13 keeps the prev val of the quot series
@@ -152,6 +157,8 @@ testl %eax, %eax #number is zero so no geo series
 je seriesError4_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
+testl %edx, %edx
+jne seriesError4_HW1
 cmp $1, %rdi
 jne notFirst4_HW1
 movl %eax, %r13d #r13 keeps the prev val of the quot series
@@ -161,6 +168,8 @@ notFirst4_HW1:
 movl %eax, %r12d #r12 keeps the cur val of the quot series
 cdq
 idiv %r13d #eax has the quot of the series
+testl %edx, %edx
+jne seriesError4_HW1
 movl %r12d, %r13d #r13 now has the cur value of the quot series
 
 cmp $2, %rdi
