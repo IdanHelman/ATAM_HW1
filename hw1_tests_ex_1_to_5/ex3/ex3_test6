@@ -1,0 +1,126 @@
+.global _start
+
+.section .text
+    mov $rich, %rax
+    cmpb $1, (%rax)
+    jne bad_exit
+    
+    movq $60, %rax
+    movq $0, %rdi
+    syscall
+
+bad_exit:
+    movq $60, %rax
+    movq $1, %rdi
+    syscall
+
+.section .data
+root:
+    .quad a, b, 0
+a:
+    .quad c, d, 0
+b:
+    .quad e, f, 0
+c:
+    .quad g, h, 0
+d:
+    .quad i, j, 0
+e:
+    .quad k, l, 0
+f:
+    .quad m, n, 0
+g:
+    .quad o, p, 0
+h:
+    .quad q, r, 0
+i:
+    .quad s, t, 0
+j:
+    .quad u, v, 0
+k:
+    .quad w, x, 0
+l:
+    .quad y, z, 0
+m:
+    .quad aa, bb, 0
+n:
+    .quad cc, dd, 0
+o:
+    .quad ee, ff, 0
+p:
+    .quad gg, hh, 0
+q:
+    .quad ii, jj, 0
+r:
+    .quad kk, ll, 0
+s:
+    .quad mm, nn, 0
+t:
+    .quad oo, pp, 0
+u:
+    .quad qq, rr, 0
+v:
+    .quad ss, tt, 0
+w:
+    .quad uu, vv, 0
+x:
+    .quad ww, xx, 0
+y:
+    .quad yy, zz, 0
+z:
+    .quad 0
+aa:
+    .quad 0
+bb:
+    .quad 0
+cc:
+    .quad 0
+dd:
+    .quad 0
+ee:
+    .quad 0
+ff:
+    .quad 0
+gg:
+    .quad 0
+hh:
+    .quad 0
+ii:
+    .quad 0
+jj:
+    .quad 0
+kk:
+    .quad 0
+ll:
+    .quad 0
+mm:
+    .quad 0
+nn:
+    .quad 0
+oo:
+    .quad 0
+pp:
+    .quad 0
+qq:
+    .quad 0
+rr:
+    .quad 0
+ss:
+    .quad 0
+tt:
+    .quad 0
+uu:
+    .quad 0
+vv:
+    .quad 0
+ww:
+    .quad 0
+xx:
+    .quad 0
+yy:
+    .quad 0
+zz:
+    .quad 0
+
+rich:
+    .byte 0
