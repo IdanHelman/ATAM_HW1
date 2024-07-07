@@ -107,8 +107,8 @@ inc %edi
 cmp %edi, %r14d
 je end3_HW1 #finished if the series reached its end
 movl 0(%r15, %rdi, 4), %eax #rax holds the next integer
-testl %eax, %eax #number is zero so no geo series
-je seriesError3_HW1
+#testl %eax, %eax number is zero so no geo series
+#je seriesError3_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
 testl %edx, %edx
@@ -153,8 +153,8 @@ inc %edi
 cmp %edi, %r14d
 je end4_HW1 #finished if the series reached its end
 movl 0(%r15, %rdi, 4), %eax #rax holds the next integer
-testl %eax, %eax #number is zero so no geo series
-je seriesError4_HW1
+#testl %eax, %eax number is zero so no geo series
+#je seriesError4_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
 testl %edx, %edx
@@ -192,3 +192,4 @@ seriesError4_HW1:
 
 end_HW1:
 movb %r8b, seconddegree
+xorq %rax, %rax
