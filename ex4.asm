@@ -4,14 +4,14 @@
 _start:
 #your code here
 
-movl $0, %r8d #this is for summing all good series's
+movb $0, %r8b #this is for summing all good series's
 movq $0, %rsi #rsi holds the counter for the series's
 
 startNode_HW1:
 lea (nodes), %rdi
 leaq 0(%rdi , %rsi, 8), %rdi #loading the address of the cur node
 movq (%rdi), %rdi #going to cur node
-movl $1, %r15d #if r15 has 1 it means that the sequence is good, if not it will hold 0
+movb $1, %r15b #if r15 has 1 it means that the sequence is good, if not it will hold 0
 movl $0, %edx # we use rdx to check if we are decreasing or increasing, we start with zero because we start with equal
 
 startDownLoop_HW1:
@@ -79,11 +79,11 @@ movl $-1, %edx #updating series to decreasing
 jmp startUpLoop_HW1
 
 loopError_HW1: 
-movl $0, %r15d # we had an error with one of the iterations 
+movb $0, %r15b # we had an error with one of the iterations 
 
 endIt_HW1:
-addl %r15d, %r8d #adding one to r8 if the series was good
+addb %r15b, %r8b #adding one to r8 if the series was good
 addq $1, %rsi #going to the next node
 cmpq $3, %rsi
 jne startNode_HW1
-movl %r8d, result
+movb %r8b, result
