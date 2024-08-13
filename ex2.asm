@@ -87,7 +87,8 @@ movb $2, %r8b
 jmp end_HW1
 
 not_valid2_HW1:
-jmp end_HW1
+#jmp end_HW1
+movq $0, %rdi
 
 case3_HW1:
 #check that is divisible by 8

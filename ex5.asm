@@ -74,8 +74,8 @@ notFirst2_HW1:
 movl %ebx, %eax #eax keeps the cur val of the difference series
 cdq
 idivl %r13d #eax now has the quot of the difference series
-testl %edx, %edx
-jne seriesError2_HW1
+#testl %edx, %edx
+#jne seriesError2_HW1
 movl %ebx, %r13d #r13 now has the cur value of the diff series
 
 cmp $2, %rdi
@@ -111,8 +111,8 @@ movl 0(%r15, %rdi, 4), %eax #rax holds the next integer
 #je seriesError3_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
-testl %edx, %edx
-jne seriesError3_HW1
+#testl %edx, %edx
+#jne seriesError3_HW1
 cmp $1, %rdi
 jne notFirst3_HW1
 movl %eax, %r13d #r13 keeps the prev val of the quot series
@@ -157,8 +157,8 @@ movl 0(%r15, %rdi, 4), %eax #rax holds the next integer
 #je seriesError4_HW1
 cdq
 idivl %ebx #rax has the quot of the two values
-testl %edx, %edx
-jne seriesError4_HW1
+#testl %edx, %edx
+#jne seriesError4_HW1
 cmp $1, %rdi
 jne notFirst4_HW1
 movl %eax, %r13d #r13 keeps the prev val of the quot series
@@ -168,8 +168,8 @@ notFirst4_HW1:
 movl %eax, %r12d #r12 keeps the cur val of the quot series
 cdq
 idiv %r13d #eax has the quot of the series
-testl %edx, %edx
-jne seriesError4_HW1
+#testl %edx, %edx
+#jne seriesError4_HW1
 movl %r12d, %r13d #r13 now has the cur value of the quot series
 
 cmp $2, %rdi
